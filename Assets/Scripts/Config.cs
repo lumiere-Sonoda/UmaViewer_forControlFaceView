@@ -143,7 +143,7 @@ public class Config
     {
         Version = Application.version;
 
-        MainPath = $@"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "Low"}\Cygames\umamusume";
+        MainPath = GetDefaultMainPath();
         if (Application.isMobilePlatform)
         {
             WorkMode = WorkMode.Standalone;
@@ -202,10 +202,26 @@ public class Config
             catch (Exception ex)
             {
                 UmaViewerUI.Instance.ShowMessage("Config load error. Using default. " + ex.Message, UIMessageType.Error);
-                MainPath = $@"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "Low"}\Cygames\umamusume";
+                MainPath = GetDefaultMainPath();
             }
         }
         Instance = this;
+    }
+
+    private string GetDefaultMainPath()
+    {
+        // Unity keeps platform-specific save data in different roots. Build a sensible default per OS.
+        switch (Application.platform)
+        {
+            case RuntimePlatform.OSXPlayer:
+            case RuntimePlatform.OSXEditor:
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Library", "Application Support", "Cygames", "umamusume");
+            case RuntimePlatform.LinuxPlayer:
+            case RuntimePlatform.LinuxEditor:
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), ".config", "unity3d", "Cygames", "umamusume");
+            default: // Windows (Editor/Player)
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Low", "Cygames", "umamusume");
+        }
     }
 
     public void UpdateConfig(bool requireRestart)
