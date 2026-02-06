@@ -1,7 +1,3 @@
-#if !UNITY_ANDROID || UNITY_EDITOR
-using SFB;
-#endif
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -104,7 +100,7 @@ public class UISettingsModel : MonoBehaviour
         if (container)
         {
             var entry = container.CharaEntry;
-            var path = StandaloneFileBrowser.SaveFilePanel("Save PMX File", Config.Instance.MainPath, $"{entry.Id}_{entry.GetName()}", "pmx");
+            var path = FileDialogHelper.SaveFile("Save PMX File", Config.Instance.MainPath, $"{entry.Id}_{entry.GetName()}", "pmx");
             if (!string.IsNullOrEmpty(path))
             {
                 ModelExporter.ExportModel(container, path);
@@ -114,7 +110,7 @@ public class UISettingsModel : MonoBehaviour
         var prop_container = Builder.CurrentOtherContainer;
         if (prop_container)
         {
-            var path = StandaloneFileBrowser.SaveFilePanel("Save PMX File", Config.Instance.MainPath, $"{prop_container}", "pmx");
+            var path = FileDialogHelper.SaveFile("Save PMX File", Config.Instance.MainPath, $"{prop_container}", "pmx");
             if (!string.IsNullOrEmpty(path))
             {
                 ModelExporter.ExportModel(prop_container, path);

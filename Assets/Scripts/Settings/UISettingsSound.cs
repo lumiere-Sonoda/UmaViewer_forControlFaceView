@@ -1,6 +1,3 @@
-#if !UNITY_ANDROID || UNITY_EDITOR
-using SFB;
-#endif
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -84,7 +81,7 @@ public class UISettingsSound : MonoBehaviour
                 }
             }
 
-            var path = StandaloneFileBrowser.SaveFilePanel("Save Music MP3 File", Config.Instance.MainPath, $"{TitleText.text}", "mp3");
+            var path = FileDialogHelper.SaveFile("Save Music MP3 File", Config.Instance.MainPath, $"{TitleText.text}", "mp3");
             if (!string.IsNullOrEmpty(path))
             {
                 StartCoroutine(AudioExporter.ExportAudio(lists, path, Builder.CurrentLiveSoundAWBIndex));

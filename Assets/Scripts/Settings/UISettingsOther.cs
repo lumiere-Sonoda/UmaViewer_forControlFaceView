@@ -1,7 +1,3 @@
-#if !UNITY_ANDROID || UNITY_EDITOR
-using SFB;
-#endif
-
 using System.Collections;
 using System.Diagnostics;
 using System.IO;
@@ -64,7 +60,7 @@ public class UISettingsOther : MonoBehaviour
     {
 #if !UNITY_ANDROID || UNITY_EDITOR
         var browseStartPath = GetBrowseStartPath();
-        var selected = StandaloneFileBrowser.OpenFolderPanel("Select Uma data folder", browseStartPath, false);
+        var selected = FileDialogHelper.OpenFolder("Select Uma data folder", browseStartPath, false);
         if (selected != null && selected.Length > 0 && !string.IsNullOrEmpty(selected[0]))
         {
             var resolvedDataPath = ResolveUmaDataPath(selected[0]);
