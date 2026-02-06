@@ -1,0 +1,12 @@
+﻿<Solution>
+  <Project Path="RootMotionsScript.csproj" />
+  <Project Path="umamusume.csproj" />
+  <Project Path="RuntimeGizmo.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Lame.csproj" />
+  <Project Path="HSVPicker.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="StandalongFileBrowser.runtime.csproj" />
+  <Project Path="HSVPicker.Editors.csproj" />
+  <Project Path="Plugins.csproj" />
+</Solution>
